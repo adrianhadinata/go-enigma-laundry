@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/joho/godotenv"
 	_ "github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 )
@@ -21,9 +20,9 @@ var (
 )
 
 func readConfig() error {
-	if err := godotenv.Load(); err != nil {
-		return err
-	}
+	// if err := godotenv.Load(); err != nil {
+	// 	return err
+	// }
 
 	host = os.Getenv("DB_HOST")
 	port = os.Getenv("DB_PORT")
@@ -75,6 +74,6 @@ func ApiPort() string {
 	if err != nil {
 		panic(err)
 	}
-	
+
 	return apiPort
 }
