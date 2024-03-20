@@ -1,7 +1,9 @@
 package main
 
 import (
+	"submission-project-enigma-laundry/config"
 	"submission-project-enigma-laundry/entity"
+	"submission-project-enigma-laundry/test"
 
 	"github.com/gin-gonic/gin"
 )
@@ -42,10 +44,15 @@ func main() {
 				transactionsGroup.POST("/", entity.InsertTransaction)
 				transactionsGroup.GET("/", entity.FindAllTransaction)
 			}
+
+			testDBConnection := v1Api.Group("/db")
+			{
+				testDBConnection.GET("/", test.TestConnectDB)
+			}
 		}
 	}
 
-	err := router.Run(":8080")
+	err := router.Run(config.ApiPort())
 
 	if err != nil {
 		panic(err)
